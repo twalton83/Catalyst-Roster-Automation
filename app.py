@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import os
 import config
 from config import catalystKey, catalystUser, uciNetPass
-import cv2
+import time
 
 
 os.chdir('/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation')
@@ -44,9 +44,19 @@ reportsButton = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#ta
 
 reportsButton.click()
 
-reportLinks = driver.find_elements_by_link_text('View Report')
+reportLinksList = driver.find_elements_by_link_text('View Report')
 
-reportLinks[0].click()
-downloadButton = pyautogui.locateCenterOnScreen('/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation/Screenshots/saveAs.png', confidence =.7)
-pyautogui.click()
+reportLinks = []
 
+for link in reportLinksList:
+    reportLinks.append(link.get_attribute('href'))
+
+print(reportLinks)
+
+for link in reportLinks:
+    driver.execute_script(link)
+    print('I have successfully opened a program page.')
+    downloadButton= wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, "#ctl00_ContentPlaceHolderMain_btnExcelTop")))
+    downloadButton.click()
+    time.sleep(2)
+    driver.back()
