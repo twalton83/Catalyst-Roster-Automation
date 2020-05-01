@@ -8,12 +8,22 @@ import os
 import config
 from config import catalystKey, catalystUser, uciNetPass
 import time
+from datetime import date
+import datetime
+
+today = datetime.datetime.now()
+
+todayString = today.strftime('%a, %m, %d, %I:%M')
+
+
 
 
 os.chdir('/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation')
 
-
-driver = webdriver.Chrome()
+chrome_options = webdriver.ChromeOptions()
+prefs = {'download.default_directory' : f'/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation/{today}'}
+chrome_options.add_experimental_option('prefs', prefs)
+driver = webdriver.Chrome(chrome_options=chrome_options)
 
 driver.get('https://catalyst.merage.uci.edu/')
 
@@ -51,7 +61,6 @@ reportLinks = []
 for link in reportLinksList:
     reportLinks.append(link.get_attribute('href'))
 
-print(reportLinks)
 
 for link in reportLinks:
     driver.execute_script(link)
