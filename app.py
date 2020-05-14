@@ -15,8 +15,8 @@ from open import vpnLogin
 today = date.today()
 os.chdir('/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation')
 chrome_options = webdriver.ChromeOptions()
-prefs = {'download.default_directory' : f'/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation/{today}'}
-chrome_options.add_experimental_option('prefs', prefs)
+#prefs = {'download.default_directory' : f'/Users/Tatiana/Desktop/CODE/Catalyst-Roster-Automation/{today}'}
+#chrome_options.add_experimental_option('prefs', prefs)
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
 wait = WebDriverWait(driver, 20)

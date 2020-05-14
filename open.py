@@ -18,5 +18,7 @@ def vpnLogin():
     pyautogui.write(config.uciNetPass)
     pyautogui.press('enter')
     pyautogui.press('enter')
+    time.sleep(3)
     return True
-    
+
+
